@@ -1,0 +1,219 @@
+doctype html
+html(lang='en')
+  head
+    title Kopair - Client Dashboard
+    // BEGIN META
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='keywords', content='your,keywords')
+    meta(name='description', content='Short explanation about this website')
+    // END META
+    // BEGIN STYLESHEETS
+    // BEGIN GLOBAL STYLE
+    link(href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900', rel='stylesheet', type='text/css')
+    link(type='text/css', rel='stylesheet', href='./assets/css/theme-default/bootstrap.css')
+    link(type='text/css', rel='stylesheet', href='./assets/css/theme-default/materialadmin.css')
+    script(src='https://use.fontawesome.com/92f5b55f55.js')
+    // <link type="text/css" rel="stylesheet" href="./assets/css/theme-default/font-awesome.min.css" />
+    link(type='text/css', rel='stylesheet', href='./assets/css/theme-default/material-design-iconic-font.min.css')
+    // END GLOBAL STYLE
+    link(type='text/css', rel='stylesheet', href='./css/client-dashboard.css')
+    link(type='text/css', rel='stylesheet', href='./assets/css/theme-default/libs/DataTables/jquery.dataTables.css')
+    //
+      <link type="text/css" rel="stylesheet" href="./assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css"
+      />
+    link(type='text/css', rel='stylesheet', href='./assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css')
+    // END STYLESHEETS
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(type='text/javascript', src='../../assets/js/libs/utils/html5shiv.js?1403934957')
+      script(type='text/javascript', src='../../assets/js/libs/utils/respond.min.js?1403934956')
+  body.menubar-hoverable.header-fixed.menubar-pin
+    // BEGIN HEADER
+    header#header
+      .headerbar
+        // Brand and toggle get grouped for better mobile display
+        .headerbar-left
+          ul.header-nav.header-nav-options
+            li.header-nav-brand
+              .brand-holder
+                a(href='../../html/dashboards/dashboard.html')
+                  span.text-lg.text-bold.text-primary KOPAIR
+            li
+              a.btn.btn-icon-toggle.menubar-toggle(data-toggle='menubar', href='javascript:void(0);')
+                i.fa.fa-bars
+        // Collect the nav links, forms, and other content for toggling
+        .headerbar-right
+          ul.header-nav.header-nav-profile
+            li.dropdown
+              a.dropdown-toggle.ink-reaction(href='javascript:void(0);', data-toggle='dropdown')
+                img(src='./assets/img/avatar1.jpg?1403934956', alt='')
+                span.profile-info
+                  | Daniel Johnson
+                  small User
+              ul.dropdown-menu.animation-dock
+                li
+                  a(href='#')
+                    i.fa.fa-fw.fa-power-off.text-danger
+                    |  Logout
+              // end .dropdown-menu
+            // end .dropdown
+          // end .header-nav-profile
+        // end #header-navbar-collapse
+    // END HEADER
+    // BEGIN BASE
+    #base
+      // BEGIN CONTENT
+      #content
+        // BEGIN ITEM LIST
+        section
+          .section-body
+            .row
+              // end .col
+              .card
+                .card-head.style-default-light.no-padding
+                  header Cargo List
+                  header.right
+                    button.btn.btn-icon-toggle.ink-reaction(type='button', data-toggle='modal', data-target='#modal-item')
+                      i.fa.fa-commenting(data-toggle='tooltip', data-placement='top', data-original-title='Send Feedback')
+                // BEGIN MODAL
+                #modal-item.modal.fade(role='dialog')
+                  .modal-dialog
+                    // Modal content
+                    .col-md-12
+                      form.form.form-validate.floating-label(action='', novalidate='novalidate')
+                        .card
+                          .card-head.style-default-light
+                            header Send Feedback
+                            header.right
+                              button.btn.btn-icon-toggle.ink-reaction.reset(type='button', data-dismiss='modal')
+                                i.fa.fa-times
+                          .card-body
+                            .form-group
+                              textarea.form-control(name='txtaFeedback', placeholder='Your Feedback')
+                          .card-actionbar
+                            .card-actionbar-row
+                              input#btnAddItem.btn.btn-flat.btn-primary.ink-reaction(type='submit', name='btnSubmitItem', value='SEND')
+                              input.btn.btn-flat.btn-primary.ink-reaction.reset(type='button', data-dismiss='modal', value='CLOSE')
+                        // END MODAL CARD
+                      // BEGIN MODAL FORM
+                    // END MODAL CONTENT
+                // END MODAL
+                .card-body.no-padding
+                  .col-lg-12
+                    .table-responsive
+                      table#tableItem.table-dynamic.table.table-striped.table-hover
+                        thead
+                          tr
+                            th.sort-numeric.sorting_asc Item ID
+                            th Item Details
+                            th Cargo Arrival Date
+                            th Cargo Shipping Date
+                            th Cargo Status
+                        tbody
+                          tr
+                            td 1
+                            td
+                              .detail-item
+                                .thumb-item
+                                  a.item(href='#')
+                                    img(src='./assets/img/cargo1.jpg', alt="Invicta 10620 Men's Corduba Chronograph Silver Textured Dial Black")
+                              .info-item
+                                .title-item
+                                  a(href='#')
+                                    | Invicta 10620 Men's Corduba Chronograph Silver Textured Dial Black
+                            td 21/03/2016
+                            td 21/08/2016
+                            td Pending
+                          tr
+                            td 2
+                            td
+                              .detail-item
+                                .thumb-item
+                                  a.item(href='#')
+                                    img(src='./assets/img/cargo2.jpg', alt="Lucien Piccard 40024-03 Men's Vertigo Black Genuine Leather Blue Dial")
+                              .info-item
+                                .title-item
+                                  a(href='#')
+                                    | Lucien Piccard 40024-03 Men's Vertigo Black Genuine Leather Blue Dial
+                            td 21/03/2016
+                            td 21/08/2016
+                            td Pending
+                          tr
+                            td 3
+                            td
+                              .detail-item
+                                .thumb-item
+                                  a.item(href='#')
+                                    img(src='./assets/img/cargo1.jpg', alt="Invicta 10620 Men's Corduba Chronograph Silver Textured Dial Black")
+                              .info-item
+                                .title-item
+                                  a(href='#')
+                                    | Invicta 10620 Men's Corduba Chronograph Silver Textured Dial Black
+                            td 21/03/2016
+                            td 21/08/2016
+                            td Checking
+                          tr
+                            td 4
+                            td
+                              .detail-item
+                                .thumb-item
+                                  a.item(href='#')
+                                    img(src='./assets/img/cargo2.jpg', alt="Lucien Piccard 40024-03 Men's Vertigo Black Genuine Leather Blue Dial")
+                              .info-item
+                                .title-item
+                                  a(href='#')
+                                    | Lucien Piccard 40024-03 Men's Vertigo Black Genuine Leather Blue Dial
+                            td 21/03/2016
+                            td 21/08/2016
+                            td Arrived
+        // END ITEM LIST
+      // end #content
+      // END CONTENT
+      // BEGIN MENUBAR
+      #menubar.menubar-inverse
+        .menubar-fixed-panel
+          div
+            a.btn.btn-icon-toggle.btn-default.menubar-toggle(data-toggle='menubar', href='javascript:void(0);')
+              i.fa.fa-bars
+          .expanded
+            a(href='./dashboard.html')
+              span.text-lg.text-bold.text-primary KOPAIR
+        .menubar-scroll-panel
+          // BEGIN MAIN MENU
+          ul#main-menu.gui-controls
+            // BEGIN DASHBOARD
+            li
+              a(href='./client-dashboard.html')
+                .gui-icon
+                  i.md.md-home
+                span.title Dashboard
+            // end /menu-li
+            // END DASHBOARD
+          // end .main-menu
+          // END MAIN MENU
+          .menubar-foot-panel
+            small.no-linebreak.hidden-folded
+              span.opacity-75 Copyright © 2016
+              strong Bakerlite
+        // end .menubar-scroll-panel
+      // end #menubar
+      // END MENUBAR
+    // end #base
+    // END BASE
+    // BEGIN JAVASCRIPT
+    // BEGIN GLOBAL JS
+    script(src='./assets/js/libs/jquery/jquery-1.11.2.min.js')
+    script(src='./assets/js/libs/jquery/jquery-migrate-1.2.1.min.js')
+    script(src='./assets/js/libs/bootstrap/bootstrap.min.js')
+    script(src='./assets/js/libs/spin.js/spin.min.js')
+    script(src='./assets/js/libs/autosize/jquery.autosize.min.js')
+    script(src='./assets/js/core/source/App.js')
+    // END GLOBAL JS
+    script(src='./assets/js/libs/DataTables/jquery.dataTables.min.js')
+    // <script src="./assets/js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.min.js"></script>
+    script(src='./assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js')
+    script(src='./assets/js/core/demo/DemoTableDynamic.js')
+    script(src='./assets/js/core/source/AppVendor.js')
+    script(src='./js/dashboard.js')
+    // END JAVASCRIPT

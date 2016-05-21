@@ -1,0 +1,8 @@
+extend layout
+block content
+  if customers
+    ul
+      each customer in customers
+        li= customer.name
+  else
+    h2 No Customers

@@ -1,0 +1,245 @@
+extends layout
+block css-library
+  link(type='text/css', rel='stylesheet', href='/assets/css/theme-default/libs/DataTables/jquery.dataTables.css')
+  link(type='text/css', rel='stylesheet', href='/assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css')
+block css-particular
+  link(rel='stylesheet', href='./css/dashboard.css')
+block js-library
+  //APP
+  script(src='./assets/js/core/source/AppVendor.js') 
+  script(src='./assets/js/core/source/AppForm.js')
+  //VALIDATE
+  script(src='./assets/js/libs/jquery-validation/dist/jquery.validate.min.js')
+  script(src='./assets/js/libs/inputmask/jquery.inputmask.bundle.min.js')
+  //TABLE
+  script(src='./assets/js/libs/DataTables/jquery.dataTables.min.js')
+  script(src='./assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js')
+  //DEMO
+  script(src='./assets/js/core/demo/DemoFormComponents.js')
+  script(src='./assets/js/core/demo/DemoTableDynamic.js')
+block js-particular
+  script(src='./js/dashboard.js', type='text/javascript')
+block content
+  // BEGIN ITEM LIST
+  .row
+    // end .col
+    .card
+      .card-head.no-padding.style-default-light
+        header Item List
+        header.right
+          button.btn.btn-icon-toggle.ink-reaction(type='button', data-toggle='modal', data-target='#modal-item')
+            i.fa.fa-plus(data-toggle='tooltip', data-placement='top', data-original-title='Add new item')
+      
+      #modal-item.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .col-md-12
+            form.form.form-validate.floating-label(action='', novalidate='novalidate')
+              .card
+                .card-head.style-default-light
+                  header Add item
+                  header.right
+                    button.btn.btn-icon-toggle.ink-reaction.reset(type='button', data-dismiss='modal')
+                      i.fa.fa-times
+                .card-body
+                  .form-group
+                    input#detail.form-control(type='text', name='txtDetail', required='')
+                    label(for='Name1') Item Detail
+                  .form-group
+                    input#customer-item.form-control.autocomplete(type='text', name='txtCustomerItem', required='')
+                    label(for='customer-item') Customer Name*
+                    ul#auto-item.search-text.auto(table-target='#tableItem', input-target='#customer-item')
+                  .form-group
+                    input#status.form-control(type='text', name='txtStatus', required='')
+                    label(for='detail') Status*
+                  .form-group.none-floating-label
+                    input#shipping-date.form-control(type='text', name='txtShippingDate', data-inputmask="'alias': 'date'", required='')
+                    label Shipping Date*
+                  .form-group.date.none-floating-label
+                    input#delivery-date.form-control(type='text', name='txtDeliveryDate', data-inputmask="'alias': 'date'", required='')
+                    label Delivery Date*
+                .card-actionbar
+                  .card-actionbar-row
+                    input#btnAddItem.btn.btn-flat.btn-primary.ink-reaction(type='submit', name='btnSubmitItem', value='ADD ITEM')
+                    input.btn.btn-flat.btn-primary.ink-reaction.reset(type='button', data-dismiss='modal', value='CLOSE')
+              // END MODAL CARD
+            // BEGIN MODAL FORM
+          // END MODAL CONTENT
+        // END MODAL
+            
+      .card-body.no-padding
+        .col-lg-12
+          .table-responsive
+            table#tableItem.table-dynamic.table.table-striped.table-hover
+              thead
+                tr
+                  th.sort-numeric.sorting_asc Item ID
+                  th Item Details
+                  th Customer Name
+                  th Status
+                  th Shipping Date
+                  th Delivery Date
+                  th.text-right Action
+              tbody
+                if items
+                  each item in items
+                    tr
+                      td= item.id
+                      td= item.details
+                      td= item.customer_id.name
+                      td= item.status
+                      td= item.shippingDate
+                      td= item.deliveryDate
+                      td.text-right
+                        button.btn.btn-icon-toggle.edit(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Edit item')
+                          i.fa.fa-pencil
+                        button.btn.btn-icon-toggle.delete(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Delete item')
+                          i.fa.fa-trash-o
+                
+  // END ITEM LIST
+  // BEGIN CUSTOMER LIST
+  .row
+    // end .col
+    .card
+      .card-head.no-padding.style-default-light
+        header Customer List
+        header.right
+          button.btn.btn-icon-toggle.ink-reaction(type='button', data-toggle='modal', data-target='#modal-customer')
+            i.fa.fa-user-plus(data-toggle='tooltip', data-placement='top', data-original-title='Add new customer')
+      // BEGIN MODAL
+      #modal-customer.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .col-md-12
+            form.form.form-validate.floating-label(action='', novalidate='novalidate')
+              .card
+                .card-head.style-default-light
+                  header Add customer
+                  header.right
+                    button.btn.btn-icon-toggle.ink-reaction(type='button', data-dismiss='modal')
+                      i.fa.fa-times
+                .card-body
+                  .form-group
+                    input#name.form-control(type='text', name='txtName', required='')
+                    label(for='name') Customer Name*
+                  .form-group
+                    input#email.form-control(type='email', name='txtEmail', required='')
+                    label(for='email') Customer Email*
+                  .form-group
+                    input#phone.form-control(type='text', name='txtPhone')
+                    label(for='phone') Phone
+                  .form-group
+                    input#facebook.form-control(type='text', name='txtFacebook')
+                    label(for='facebook') Facebook
+                  .form-group.date
+                    input#address.form-control(type='text', name='txtAddress')
+                    label Address
+                  .form-group
+                    input#password.form-control(type='password', name='pwdPassWord', required='')
+                    label(for='password') Password*
+                  .form-group
+                    input#re-password.form-control(type='password', name='pwdRePassWord', required='')
+                    label(for='re-password') Confirm Password*
+                .card-actionbar
+                  .card-actionbar-row
+                    input#btnAddCustomer.btn.btn-flat.btn-primary.ink-reaction.disabled(type='submit', name='btnSubmitCustomer', value='ADD CUSTOMER')
+                    input.btn.btn-flat.btn-primary.ink-reaction(type='button', data-dismiss='modal', value='CLOSE')
+              // END MODAL CARD
+            // BEGIN MODAL FORM
+          // END MODAL CONTENT
+      // END MODAL      
+      .card-body.no-padding
+        .col-lg-12
+          .table-responsive
+            table#tableCustomer.table-dynamic.table.table-striped.table-hover
+              thead
+                tr
+                  th.sort-numeric Customer ID
+                  th Customer Name
+                  th Customer Email
+                  th Customer Phone
+                  th Customer Facebook
+                  th Customer Address
+                  th.text-right Action
+              tbody
+                if customers
+                each customer in customers
+                  tr
+                    td= customer.id
+                    td= customer.name
+                    td= customer.email
+                    td= customer.phone
+                    td= customer.fb
+                    td= customer.address
+                    td.text-right
+                      button.btn.btn-icon-toggle.edit(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Edit customer')
+                        i.fa.fa-pencil
+                      button.btn.btn-icon-toggle.delete(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Delete customer')
+                        i.fa.fa-trash-o
+  // END CUSTOMER LIST
+  // BEGIN FEEDBACK LIST
+  .row
+    .card
+      .card-head.no-padding
+        header Feedback List
+        header.right
+          button.btn.btn-icon-toggle.ink-reaction(type='button', data-toggle='modal', data-target='#modal-feedback')
+            i.fa.fa-plus(data-toggle='tooltip', data-placement='top', data-original-title='Add new customer')
+      
+      #modal-feedback.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .col-md-12
+            form.form.form-validate.floating-label(action='', novalidate='novalidate')
+              .card
+                .card-head.style-default-light
+                  header Add Feedback
+                  header.right
+                    button.btn.btn-icon-toggle.ink-reaction(type='button', data-dismiss='modal')
+                      i.fa.fa-times
+                .card-body
+                  .form-group.date
+                    input#address.form-control(type='text', name='txtAddress')
+                    label Feedback Detail*
+                  .form-group
+                    input#customer-feedback.form-control.autocomplete(type='text', name='txtCustomerFb', required='')
+                    label(for='name') Customer Name*
+                    ul#auto-feedback.search-text.auto(input-target='#customer-feedback', table-target='#tableFeedback')
+                  .form-group
+                    input#facebook.form-control(type='text', name='txtFacebook')
+                    label(for='facebook') Facebook
+                .card-actionbar
+                  .card-actionbar-row
+                    input#btnAddFeedBack.btn.btn-flat.btn-primary.ink-reaction(type='submit', name='btnSubmitFeedBack', value='ADD FEEDBACK')
+                    input.btn.btn-flat.btn-primary.ink-reaction(type='button', data-dismiss='modal', value='CLOSE')
+              // END MODAL CARD
+            // BEGIN MODAL FORM
+          // END MODAL CONTENT
+      // END MODAL
+      
+      .card-body.no-padding
+        .col-lg-12
+          .table-responsive
+            table#tableFeedback.table-dynamic.table.table-striped.table-hover
+              thead
+                tr
+                  th.sort-numeric.sorting-asc Feedback ID
+                  th Feedback Details
+                  th Customer Name
+                  th Customer Facebook
+                  th.text-right Action
+              tbody
+                if feedbacks
+                  each feedback in feedbacks
+                    tr
+                      td= feedback.id
+                      td= feedback.details
+                      td= feedback.customer_id.name
+                      td= feedback.customer_id.fb
+                      td.text-right
+                        button.btn.btn-icon-toggle.edit(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Edit feedback')
+                          i.fa.fa-pencil
+                        button.btn.btn-icon-toggle.delete(type='button', data-toggle='tooltip', data-placement='top', data-original-title='Delete feedback')
+                          i.fa.fa-trash-o              
+
+  // END FEEDBACK LIST
